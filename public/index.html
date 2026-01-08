@@ -161,6 +161,20 @@
     color: #ccc;
 }
        .shop-container {
+    <div class="shop-container">
+    <div class="item-card">
+        <h2>Saldo Personalizado</h2>
+        <p>Escribe cuánto quieres pagar:</p>
+        
+        <input type="number" id="monto-personalizado" class="input-precio" placeholder="0.00">
+        <span> USD</span>
+        
+        <br><br>
+        <button class="btn-buy" onclick="pagarMontoVariable('Saldo Especial', 'https://www.paypal.me/krizase/')">
+            Comprar ahora
+        </button>
+    </div>
+</div>
     display: grid;
     /* Este es el truco: crea columnas de mínimo 300px y rellena el espacio */
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
@@ -319,7 +333,7 @@ $8.49 -> $5.00 <br>
 $9.99 -> $5.50 <br>
 $11.99 -> $6.00 <br>
 </div>
-       <br> <br> <br><br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <div class="item-price">$0.60 + the item price low</div>
+       <br> <br> <br><br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <div class="item-price">$</div>
        <button class="btn btn-buy" onclick="abrirPago('DISCORD DECORATIONS', '0.60', 'https://paypal.me/krizase/0.60')">Comprar Ahora</button>
     </div>
     
@@ -445,7 +459,22 @@ $11.99 -> $6.00 <br>
             document.getElementById('btn-paypal-link').style.display = 'none';
         }
     }
+
+    // --- ESTO VA AL FINAL (DENTRO DE SCRIPT) ---
+
+function pagarMontoVariable(nombreProducto, linkBase) {
+    const monto = document.getElementById('monto-personalizado').value;
+
+    if (monto && monto > 0) {
+        const linkFinal = linkBase + monto;
+        // Llamamos a la función que abre tu modal de confirmación
+        abrirPago(nombreProducto, monto, linkFinal);
+    } else {
+        alert("Por favor, pon un número válido.");
+    }
+}
 </script>
+
     
 <span style="background-color: rgba(0, 0, 0, 0.4); border-bottom: 2px solid rgb(255, 255, 255);">
 Cualquier inconveniente lo puedes reportar en nuestro servidor, somos completamente seguros y limpios a la hora de hacer nuestro trabajo. <br>
@@ -455,6 +484,7 @@ Cualquier error de nuestra parte que arruine tu compra se te rembolsara el diner
 </body>
 
 </html>
+
 
 
 
