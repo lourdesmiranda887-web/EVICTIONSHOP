@@ -81,6 +81,22 @@
 .btn-buy {
     animation: pulse-blue 2s infinite; /* El botón "late" cada 2 segundos */
 }
+
+        @keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.item-card {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+        
 @keyframes gradientAnimation {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
@@ -114,7 +130,36 @@
 
         h1 { color: var(--discord-blurple); margin-bottom: 10px; }
 
-        /* Contenedor de la Tienda */
+        .shop-container {
+    display: flex;
+    flex-wrap: wrap;       /* Los productos bajan solos si no caben */
+    justify-content: center; /* Centra los productos */
+    gap: 30px;             /* Espacio real entre cuadros */
+    padding: 40px 20px;
+}
+
+.item-card {
+    background: rgba(255, 255, 255, 0.05); /* Fondo oscuro traslúcido */
+    backdrop-filter: blur(10px);           /* Efecto de vidrio esmerilado */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 25px;
+    width: 300px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+/* Espaciado interno para que el texto no toque los bordes */
+.item-card h2 {
+    margin-bottom: 15px;
+    font-size: 24px;
+}
+
+.item-card p {
+    margin-bottom: 20px;
+    line-height: 1.6; /* Da más espacio entre líneas de texto */
+    color: #ccc;
+}
        .shop-container {
     display: grid;
     /* Este es el truco: crea columnas de mínimo 300px y rellena el espacio */
@@ -244,7 +289,7 @@
             <br> ¡ADVERTENCIA! solo se hace en juegos que permitan regalar los pases o items mediante comercios o en el mismo juego como forma de regalo. <br> <br><br>
          Want to get an item or pass in your favorite game but it's too expensive? Don't worry, <br> we'll buy it for you and give it to you at a low price. <br> <br> !WARNING! This only applies to games that allow you to gift passes or items through shops or within the game itself.
         </div>
-       <br> <br> <br><br><br><br><br><br><br><br><br><br><div class="item-price">$2.00 USD + you item price low</div>
+       <br> <br> <br><br><br><br><br><br><br><br><br><br><br><br><br><div class="item-price">$2.00 USD + you item price low</div>
         <button class="btn btn-buy" onclick="abrirPago('ROBLOX LOW PRICES HELPER', '2.00', 'https://www.paypal.me/krizase/2.00')">Comprar Ahora</button>
     </div> 
 
@@ -356,6 +401,7 @@ Cualquier error de nuestra parte que arruine tu compra se te rembolsara el diner
 </body>
 
 </html>
+
 
 
 
