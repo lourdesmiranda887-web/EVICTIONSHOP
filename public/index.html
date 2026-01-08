@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Oficial | Mi Servidor Discord</title>
+    <style>.btn-buy {
+    background-color: #5865F2; /* Azul Discord */
+    color: white;              /* Texto blanco */
+    padding: 12px 24px;        /* Tamaño del botón */
+    border: none;              /* Quitar borde feo por defecto */
+    border-radius: 8px;        /* Bordes redondeados */
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease; /* Duración de la animación */
+    box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3); /* Sombra suave */
+    outline: none;
+}
+
+/* Animación al pasar el ratón (Hover) */
+.btn-buy:hover {
+    background-color: #4752c4; /* Azul un poco más oscuro */
+    transform: translateY(-3px); /* El botón "salta" hacia arriba */
+    box-shadow: 0 8px 25px rgba(88, 101, 242, 0.5); /* La sombra crece */
+}
+
+/* Animación al hacer clic */
+.btn-buy:active {
+    transform: translateY(-1px); /* El botón baja un poquito al presionarlo */
+}
+ body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+    /* Colores: Negro, Gris Discord, Azul Discord, Púrpura */
+    background: linear-gradient(-45deg, #000000, #2c2f33, #5865f2, #7289da);
+    background-size: 400% 400% !important;
+    animation: gradientAnimation 10s ease infinite !important;
+    background-attachment: fixed;
+}
+/* Animación de latido suave */
+@keyframes pulse-blue {
+    0% { box-shadow: 0 0 0 0 rgba(88, 101, 242, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(88, 101, 242, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(88, 101, 242, 0); }
+}
+
+.btn-buy {
+    animation: pulse-blue 2s infinite; /* El botón "late" cada 2 segundos */
+}
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* IMPORTANTE: Si tienes un div principal con fondo, quítalo o ponlo transparente */
+.shop-container, .main-wrapper {
+    background: transparent !important;
+}
+        :root { 
+            --discord-blurple: #5865F2; 
+            --discord-dark: #36393f; 
+            --discord-card: #2f3136; 
+            --success: #3ba55c; 
+            --text-gray: #b9bbbe;
+        }
+
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: var(--discord-dark); 
+            color: white; 
+            margin: 0; 
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        h1 { color: var(--discord-blurple); margin-bottom: 10px; }
+
+        /* Contenedor de la Tienda */
+       .shop-container {
+    display: grid;
+    /* Este es el truco: crea columnas de mínimo 300px y rellena el espacio */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 25px; /* Espacio entre cada tarjeta */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+    
+        /* Tarjeta de Producto */
+        .item-card {
+            background: var(--discord-card);
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            border: 1px solid #375f9e;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .item-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--discord-blurple);
+        }
+        .texto-neon {
+    color: #fff;
+    text-shadow: 0 0 5px #fff, 0 0 10px #5865F2, 0 0 20px #5865F2;
+}
+        .item-icon { font-size: 50px; margin-bottom: 15px; }
+        .item-title { font-size: 22px; font-weight: bold; margin: 10px 0; }
+        .item-desc { color: var(--text-gray); font-size: 14px; margin-bottom: 20px; height: 40px; }
+        .item-price { font-size: 24px; font-weight: bold; color: var(--success); margin-bottom: 20px; }
+
+        .btn {
+            display: inline-block;
+            width: 100%;
+            padding: 12px;
+            border-radius: 5px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .btn-buy { background: var(--discord-blurple); color: white; }
+        .btn-buy:hover { background: #4752c4; }
+
+        /* Ventana de Pago (Modal) */
+        #payment-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            justify-content: center; align-items: center;
+            z-index: 100;
+        }
+
+        .modal-content {
+            background: var(--discord-card);
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            position: relative;
+        }
+
+        #receipt { display: none; background: white; color: black; padding: 20px; border-radius: 8px; margin-top: 20px; border: 2px dashed var(--discord-blurple); }
+        .code-display { font-size: 24px; color: var(--discord-blurple); font-weight: bold; margin: 15px 0; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1 style="color: #fefefe;">🛍️ VIIKriZaseIIV SHOP - EVC -</h1>
+    <p>Ahorrate tu tiempo y dinero y obten items privilegiados en nuestro sitio para tus juegos o servidores de discord. <br> <br> 
+        Save yourself time and money and get premium items on our site for your games or Discord servers. </p>
+</header>
+
+<div class="shop-container">
+    
+    <div class="item-card">
+        <div class="item-icon">
+            <img src="https://media.discordapp.net/attachments/1175614486665769081/1458571652312072213/emoji.png?ex=69602034&is=695eceb4&hm=e5a467ea57a4f20818379c625439a3c4fa4d437ea9e898fb0f8d6961360e38e0&=&format=webp&quality=lossless&width=160&height=160" alt="Producto 1"> </div>
+        <div class="item-title">DISCORD SERVER SECURITY</div>
+        <div class="item-desc">Se configura tu servidor desde 0 para una seguridad moderada y preparado para anti raids. <br> 
+        <br> Your server is configured from scratch for moderate security and prepared for anti-raids.
+
+        </div>
+        <br> <br> <br> <br> <br> <br> <div class="item-price">$5.00 USD</div>
+    <button class="btn btn-buy" onclick="abrirPago('DISCORD SERVER SECURITY', '5.00','https://www.paypal.me/krizase/5.00')">Comprar Ahora</button>
+    </div>
+    
+    <div class="item-card">
+        <div class="item-icon">
+           <img src="https://cdn-icons-png.freepik.com/512/8741/8741489.png" style="width: 150px; height: auto;" alt="Producto 2">
+        </div>
+        <div class="item-title">MIDDLEMAN IN GAMES</div>
+        <div class="item-desc">Te ayudo hacer el intermidario de tus trades en cualquier juego de roblox o para cosas externas para tu seguridad. <br> 
+       <br>  I can help you intermediate your trades in any Roblox game or for external things for your security. <br> <br> ¡WARNING! NOT ALLOWED IN DHM GAME
+        </div>
+        <br>  <br>  <br> <br> <br> <div class="item-price">$2.00 USD</div>
+        <button class="btn btn-buy" onclick="abrirPago('MIDDLEMAN', '2.00','https://www.paypal.me/krizase/2.00')">Comprar Ahora</button>
+    </div>
+
+    <div class="item-card">
+        <div class="item-icon">
+        <img src="https://svgsilh.com/svg/28636.svg" style="width: 150px; height: auto;" alt="Producto 3">
+        </div>
+        <div class="item-title">CREATION AND DECORATION OF DISCORD SERVERS</div>
+        <div class="item-desc">Creo tu servidor de discord, lo configuro y lo decoro con roles icons, emojis, banners y logo a tu gusto para que puedas ahorrar tu tiempo.
+           <br> <br> I create your Discord server, configure it, and decorate with roles icons, emojis, banners and logo it to your liking so you can save time. <br> <br></div>
+       <br> <br> <br><br><div class="item-price">$5.00 USD</div>
+        <button class="btn btn-buy" onclick="abrirPago('DISCORD CREATION AND DECORATION PACK', '5.00', 'https://www.paypal.me/krizase/5.00')">Comprar Ahora</button>
+    </div>
+
+    <div class="item-card">
+        <div class="item-icon">
+         <img src="https://i.pinimg.com/736x/d2/44/05/d24405e919e59140d2a0252db0066b3f.jpg" style="width: 150px; height: auto;" alt="Producto 4">
+        </div>
+        <div class="item-title">ROBLOX LOW PRICES HELPER</div>
+        <div class="item-desc">Quieres obtener un item o algun pase en tu juego favorito pero es muy caro? no te preocupes,<br> aqui te lo compraremos por ti y te lo daremos a bajo precio.
+            <br> ¡ADVERTENCIA! solo se hace en juegos que permitan regalar los pases o items mediante comercios o en el mismo juego como forma de regalo. <br> <br><br>
+         Want to get an item or pass in your favorite game but it's too expensive? Don't worry, <br> we'll buy it for you and give it to you at a low price. <br> <br> !WARNING! This only applies to games that allow you to gift passes or items through shops or within the game itself.
+        </div>
+       <br> <br> <br><br><br><br><br><br><br><br><br><br><div class="item-price">$2.00 USD + you item price low</div>
+        <button class="btn btn-buy" onclick="abrirPago('ROBLOX LOW PRICES HELPER', '2.00', 'https://www.paypal.me/krizase/2.00')">Comprar Ahora</button>
+    </div> 
+
+ <div class="item-card">
+        <div class="item-icon">
+      <img src="https://tr.rbxcdn.com/180DAY-557055d091553818233a98d37367ba24/768/432/Image/Webp/noFilter" style="width: 200px; height: auto;" alt="Producto 5">
+        </div>
+        <div class="item-title">STK ITEMS</div>
+        <div class="item-desc"><br><br> Items de alto valor a precios bajos, has click en comprar y dinos que item buscas.<br> <br>
+        High-value items at low prices, click on buy and tell us what item you are looking for. <br><br> on sale: #1 Corrupt papa roni set <br>
+        #2 hearstroper original <br> #3 clucky corrupted knife  <br> <br></div>
+       <br> <br> <br> <br><br><br><br><br><br><br><br><br><br><br><br> <div class="item-price">$0.00 USD</div>
+        <button class="btn btn-buy" onclick="abrirPago('Paquete Monedas', '0.00', 'https://www.paypal.me/krizase/.00')">Comprar Ahora</button>
+    </div>
+
+<div class="item-card">
+        <div class="item-icon">
+     <img src="https://support.discord.com/hc/user_images/gHjpIaxetVpE7yLVmTeXQw.png" style="width: 150px; height: auto;" alt="Producto 6">        
+        </div>
+        <div class="item-title">DISCORD PROFILE DECORATIONS LOW PRICE</div>
+        <div class="item-desc">Quieres comprar una decoracion para tu perfil de discord pero estan muy caras? aqui te la entregamos a un precio bajo y seguro.<br><br>
+        Want to buy a decoration for your Discord profile but they're too expensive? We deliver it here at a low and secure price. </div>
+       <br> <br> <br><br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br><div class="item-price">$0.60 + the item price low</div>
+       <button class="btn btn-buy" onclick="abrirPago('Paquete Monedas', '0.60', 'https://paypal.me/krizase/0.60')">Comprar Ahora</button>
+    </div>
+d
+</div>
+</div>
+
+<div id="payment-modal">
+    <div class="modal-content">
+        <h2 id="modal-item-name">Confirmar Compra</h2>
+        <p id="modal-item-price" style="font-size: 20px; color: var(--success); font-weight: bold;"></p>
+        
+        <p style="font-size: 13px; color: var(--text-gray);">1. Haz clic en el botón de abajo para pagar.</p>
+        <a href="#" id="btn-paypal-link" target="_blank" class="btn" style="background: #0070ba; color: white; margin-bottom: 20px;">Pagar con PayPal</a>
+
+        <p style="font-size: 13px; color: var(--text-gray);">2. Una vez enviado el dinero, confirma aquí:</p>
+        <button onclick="confirmarVenta()" class="btn" style="background: var(--success); color: white;">Ya envié el pago</button>
+        <button onclick="cerrarPago()" style="background:none; border:none; color:var(--text-gray); cursor:pointer; margin-top:15px;">Cancelar</button>
+
+        <div id="receipt">
+            <h3>✅ REGISTRO CREADO</h3>
+            <p>Código de verificación:</p>
+            <div class="code-display" id="ref-code">REF-XXXX</div>
+            <p style="font-size: 12px; text-align: left;">Sube captura de este código y tu recibo de PayPal al Ticket de Discord.</p>
+            <a href="https://discord.gg/9waycThA83" class="btn btn-buy">Ir al Discord</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    let itemActual = "";
+    let precioActual = "";
+
+    function abrirPago(nombre, precio, enlace) {
+    // Estas variables deben existir arriba en tu código
+    itemActual = nombre;
+    precioActual = precio;
+
+    // Asigna el texto al modal (cuadro que aparece)
+    document.getElementById('modal-item-name').innerText = nombre;
+    document.getElementById('modal-item-price').innerText = "$" + precio + " USD";
+
+    // Busca el botón dentro del modal y le pone tu link de PayPal
+    const btnPaypal = document.getElementById('btn-paypal-link');
+    if (btnPaypal) {
+        btnPaypal.href = enlace;
+        btnPaypal.target = "_blank"; // Para que abra en pestaña nueva
+    }
+
+    // Muestra el modal de pago
+    document.getElementById('payment-modal').style.display = 'flex';
+    document.getElementById('receipt').style.display = 'none';
+}
+
+    function cerrarPago() {
+        document.getElementById('payment-modal').style.display = 'none';
+    }
+
+    async function confirmarVenta() {
+        const user = prompt("Ingresa tu usuario de Discord:");
+        if (!user) return;
+
+        const response = await fetch('/confirmar-pago', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                usuario: user,
+                producto: itemActual,
+                monto: precioActual
+            })
+        });
+
+        const data = await response.json();
+        if (data.success) {
+            document.getElementById('ref-code').innerText = data.codigo;
+            document.getElementById('receipt').style.display = 'block';
+            document.getElementById('btn-paypal-link').style.display = 'none';
+        }
+    }
+</script>
+
+</body>
+</html>
