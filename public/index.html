@@ -5,7 +5,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda Oficial | Mi Servidor Discord</title>
-    <style>.btn-buy {
+    <style> /* Esto ajusta el contenedor de tus productos */
+.container {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los cuadros bajen si no caben */
+    justify-content: center;
+    gap: 20px;
+    padding: 10px;
+}
+
+/* Estilo para cada cuadro de producto */
+.item-card {
+    width: 90%; /* En celular ocupa casi todo el ancho */
+    max-width: 350px; /* En PC no crece más de esto */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Mantener animaciones en dispositivos táctiles */
+@media (hover: none) {
+    .btn-buy:active {
+        transform: scale(0.95); /* El botón se encoge un poco al tocarlo */
+        background-color: #4752C4;
+    }
+}
+
+/* Ajuste para pantallas grandes (PC) */
+@media (min-width: 768px) {
+    .item-card {
+        width: 300px; /* Vuelven a su tamaño original en PC */
+    }
+}
+    .btn-buy {
     background-color: #5865F2; /* Azul Discord */
     color: white;              /* Texto blanco */
     padding: 12px 24px;        /* Tamaño del botón */
@@ -326,6 +356,7 @@ Cualquier error de nuestra parte que arruine tu compra se te rembolsara el diner
 </body>
 
 </html>
+
 
 
 
